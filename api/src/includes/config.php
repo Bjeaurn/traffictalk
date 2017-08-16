@@ -2,8 +2,10 @@
 error_reporting(E_ALL ^ E_NOTICE);
 ini_set('display_errors', '1');
 
+print_r($_ENV);
+echo getenv("DATABASE_URL");
 
-define('DB_HOST', getenv('DATABASE_URL')); // Check docker-compose.yml, use the link!
+define('DB_HOST', getenv('DB_URL')); // Check docker-compose.yml, use the link!
 define('DB_DATABASE', 'autos');
 define('DB_USER', 'postgres');
 define('DB_PASSWORD', 'postgres');
