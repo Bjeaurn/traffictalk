@@ -23,8 +23,8 @@ services:
      - ./api/environment.env
 
   db:
-    image: postgres:9.6-alpine
-    environment:
+    build: database
+    environment: 
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres

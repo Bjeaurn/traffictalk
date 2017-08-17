@@ -27,7 +27,7 @@ export class KentekenComponent {
                 car => this.car = car, 
                 (err) => {},
                 () => {
-                    this.router.navigate(['car', this.car.kenteken])
+                    this.router.navigate(['car', this.car.displayKenteken])
                 }
             )
     }

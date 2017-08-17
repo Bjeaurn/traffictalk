@@ -9,8 +9,7 @@ class Car {
 
     private function fetchFromDatabase(string $kenteken) {
         $db = Database::start();
-        $result = $db->query("SELECT * FROM cars WHERE Kenteken = '". $kenteken ."'");
-        print_r($result);
+        $result = $db->query("SELECT * FROM cars WHERE kenteken = '". $kenteken ."'");
     }
 
     private function fetchRemote(string $kenteken) {

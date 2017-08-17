@@ -18,10 +18,13 @@ class Database {
         $port = (int)DB_PORT;
 
         $connection_string = "host=".$host." user=".$user." password=".$password." dbname=".$db." port=".$port;
-
-        $this->link = pg_connect($connection_string);
-        if ($this->link->connect_error) {
-            die("MySQL error: " . mysql_error());
+        try {
+            $this->link = pg_connect($connection_string);
+            if ($this->link->connect_error) {
+                die("MySQL error: " . mysql_error());
+            }
+        } catch(Exception $e) {
+            die($e);
         }
         self::$number_objects++;
         return $this->link;
@@ -51,10 +54,10 @@ class Database {
         if ($debug != false) {
             echo $this->query;
         }
-        if ($result = pg_query($this->link, $this->query)) {
+        if (@$result = pg_query($this->link, $this->query)) {
             return $result;
         } else {
-            $output = "<p><strong>MySQL error:</strong> " . mysqli_error($this->link) . "<br />";
+            $output = "<p><strong>MySQL error:</strong> " . pg_last_error($this->link) . "<br />";
             $output .= "<strong>Last query:</strong> " . $this->query . "</p>";
             die($output);
         }

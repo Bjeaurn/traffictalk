@@ -11,7 +11,7 @@ interface ICarService {
     getByKenteken(kenteken: string): Observable<Car>
 }
 
-export const car = baseUrl+'api/car/:kenteken'
+export const car = baseUrl+'car/:kenteken'
 
 @Injectable()
 export class CarService implements ICarService {
