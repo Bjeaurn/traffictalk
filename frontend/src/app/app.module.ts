@@ -29,7 +29,7 @@ const appRoutes: Routes = [
     BaseModule,
     CarModule,
     HomeModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { enableTracing: false } ),
   ],
   exports: [
     RouterModule

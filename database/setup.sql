@@ -17,8 +17,8 @@ CREATE DATABASE traffictalk
 
 CREATE TABLE public.cars
 (
-    id uuid NOT NULL,
-    kenteken "char" NOT NULL,
+    id text COLLATE pg_catalog."default" NOT NULL,
+    kenteken text COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT cars_pkey PRIMARY KEY (id)
 )
 WITH (

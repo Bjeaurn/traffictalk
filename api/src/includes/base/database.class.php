@@ -96,8 +96,12 @@ class Database {
         }*/
     }
 
+    public function fetch($result, $type = PGSQL_ASSOC) {
+        return pg_fetch_object($result);
+    }
+
     public function fetch_array($result, $type = PGSQL_ASSOC) {
-        return pg_fetch_array($result, $type);
+        return pg_fetch_array($result);
     }
 
     public function instantiate($record, $object) {
