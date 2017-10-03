@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
-import { HttpClient } from '../shared/http.client'
+import { HttpClient } from '@angular/common/http'
 import { UrlBuilder } from '../shared/urlbuilder'
 
 import { baseUrl } from '../../config'
@@ -20,8 +20,7 @@ export class CarService implements ICarService {
 
     getByKenteken(kenteken: string): Observable<Car> {
         const url = UrlBuilder.fromPattern(car).withParameter("kenteken", kenteken).build()
-        return this.http.get(url)
-            .map(res => <Car>res.json())
+        return this.http.get<Car>(url)
     }
 }
 

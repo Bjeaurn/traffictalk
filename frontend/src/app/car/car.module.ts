@@ -7,7 +7,7 @@ import { CarComponent } from './car.component'
 import { CarService, MockCarService } from './car.service'
 
 const carRoutes: Routes = [
-    { path: 'car/:id', component: CarComponent },
+    { path: 'car/:kenteken', component: CarComponent },
 ]
 
 @NgModule({

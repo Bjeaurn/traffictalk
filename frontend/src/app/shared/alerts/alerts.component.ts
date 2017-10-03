@@ -8,7 +8,7 @@ import {Observable} from 'rxjs'
 })
 export class AlertsComponent {
 
-    private alerts: Observable<Alert[]>
+    protected alerts: Observable<Alert[]>
 
     constructor(private alertsService: AlertsService) {
         this.alerts = this.alertsService.getAlerts()

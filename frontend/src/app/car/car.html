@@ -1,5 +1,5 @@
 <div class="container" *ngIf="car">
     <h1 class="kenteken">{{ car.displayKenteken }}</h1>
-    <h2>{{ car.merk }} {{ car.naam }} <small class="text-muted">{{ car.kleur }}</small></h2>
+    <h2>{{ car.merk }} {{ car.name }} <small class="text-muted">{{ car.kleur }}</small></h2>
     <drivers-list [drivers]="car.drivers"></drivers-list>
 </div>

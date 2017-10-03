@@ -24,6 +24,11 @@ RUN apk update && apk upgrade && \
     sed -i 's#/var/log/apache2/#/web/logs/#g' /etc/logrotate.d/apache2 && \
     sed -i 's/Options Indexes/Options /g' /etc/apache2/httpd.conf && \
 
+    # fix container bug for syslog
+    sed  -i "s|\*.emerg|\#\*.emerg|" /etc/rsyslog.conf && \
+    sed -i 's/$ModLoad imklog/#$ModLoad imklog/' /etc/rsyslog.conf && \
+    sed -i 's/$KLogPermitNonKernelFacility on/#$KLogPermitNonKernelFacility on/' /etc/rsyslog.conf && \
+
     rm -rf /var/cache/apk/*
 
 VOLUME /web

@@ -8,13 +8,23 @@ class Car {
         if(!$this->id) {
             $car = $this->fetchRemote($kenteken);
             $this->persistData($car);
-            $this->kenteken = $car->kenteken;
+            $obj = new Car($car->kenteken);
+            $obj->id = $car->id;
+            $obj->data = json_encode($car);
+            $this->fill($obj);
         }
         return $this;
     }
 
     function isEmpty(): bool {
         return false;
+    }
+
+    private function fill($obj): Car {
+        $this->data = json_decode($obj->data);
+        $this->kenteken = $obj->kenteken;
+        $this->id = $obj->id;
+        return $this;
     }
 
     private function fetchFromDatabase(string $kenteken): Car {
@@ -24,17 +34,15 @@ class Car {
         if($db->num_rows($result)>0) {
             // $this-> assignment verstoppen in een fill();
             $row = $db->fetch($result);
-            $this->kenteken = $row->kenteken;
-            $this->id = $row->id;
+            $this->fill($row);
             return $this;
         }
         return new EmptyCar();
-
     }
 
     private function persistData(Car $car) {
         $db = Database::start();
-        $result = $db->query("INSERT INTO cars (id, kenteken) VALUES ('". uniqid() ."', '". $car->kenteken ."')");
+        $result = $db->query("INSERT INTO cars (id, kenteken, data) VALUES ('". uniqid() ."', '". $car->kenteken ."', '".json_encode($car)."')");
     }
 
     private function fetchRemote(string $kenteken) {

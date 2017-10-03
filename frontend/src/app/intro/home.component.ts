@@ -10,6 +10,12 @@ import {Router} from '@angular/router'
                 <app-kenteken></app-kenteken>
             </span>
         </div>
+        <div class="col-md-6">
+            <h3>Top deze week</h3>
+        </div>
+        <div class="col-md-6">
+             <h3>Top afgelopen maand</h3>
+        </div>
     `
 })
 export class HomeComponent {

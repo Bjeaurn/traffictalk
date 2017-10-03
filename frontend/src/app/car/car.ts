@@ -1,9 +1,14 @@
 import { Driver } from "./drivers/driver"
 
-export const CAR_URL_ID = "id"
+export const CAR_URL_ID = "kenteken"
 export const CAR_TYPE: string = "car"
+
 export class Car {
-    type: string = CAR_TYPE
-    drivers: Driver[] = []
-    constructor(private id: string, public name: string, public displayKenteken: string) {}
+    readonly type: string = CAR_TYPE
+    public drivers: Driver[] = []
+    readonly merk: string
+    readonly kleur: string
+
+    constructor(readonly id: string, readonly name: string, readonly displayKenteken: string) {
+    }
 }

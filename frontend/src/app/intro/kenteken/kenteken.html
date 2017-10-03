@@ -1,0 +1,8 @@
+<div>
+    <p class="lead">{{ lead }}</p>
+    <input type="text" name="Kenteken" 
+    placeholder="Kenteken"
+    #input (input)="input.value=$event.target.value.toUpperCase()" 
+    (keyup.enter)="findCar(input.value)" 
+    autocomplete="off" />
+</div>

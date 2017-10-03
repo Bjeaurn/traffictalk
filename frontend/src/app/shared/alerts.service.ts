@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core'
 import {Subject} from 'rxjs'
-import {HttpClient} from './http.client'
+import {HttpClient} from '@angular/common/http'
 
 export type Alert = {
     title: string

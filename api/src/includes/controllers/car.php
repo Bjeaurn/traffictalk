@@ -11,8 +11,9 @@ if($kenteken) {
         $data->id = $car->id;
         // $data->name = "Kia Picanto";
         $data->type = "car";
+        $data->data = $car->data;
         $data->kenteken = $car->kenteken;
-        $data->displayKenteken = "7-KSL-16";
+        $data->displayKenteken = $car->kenteken;
         // $data->kenteken = "7KSL16";
         $data->drivers = array();
         $data->drivers[0] = new Stdclass;
@@ -20,6 +21,7 @@ if($kenteken) {
         $data->drivers[0]->name = "Bjorn Schijff";
     }
 
-    die(json_encode($data));
+    new API($data, 200);
+    exit;
 }
 ?>

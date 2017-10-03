@@ -3,14 +3,18 @@ version: '3' # specify docker-compose version
 # Define the services/containers to be run
 services:
   frontend: # name of the first service
-    build: frontend # specify the directory of the Dockerfile
+    build:  # specify the directory of the Dockerfile
+      context: ./frontend
+      dockerfile: Dockerfile.web
     volumes: 
       - ./frontend/src:/usr/src/app/src
     ports:
       - 4200:4200
 
   api: #name of the second service
-    build: api # specify the directory of the Dockerfile
+    build: # specify the directory of the Dockerfile
+      context: ./api
+      dockerfile: Dockerfile.api
     volumes:
       - ./api/src:/web/html
     ports:
@@ -23,7 +27,9 @@ services:
      - ./api/environment.env
 
   db:
-    build: database
+    build:
+      context: ./database
+      dockerfile: Dockerfile.db
     environment: 
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
