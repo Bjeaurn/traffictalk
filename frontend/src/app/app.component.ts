@@ -8,5 +8,5 @@ import {HttpClient} from './shared/http.client'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 }
