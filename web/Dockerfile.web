@@ -43,6 +43,7 @@ RUN  apk update && apk upgrade && \
     rm -rf /var/cache/apk/*
 
 COPY ./frontend/dist/ /web/html/
+COPY ./frontend/config/ /web/html/
 COPY ./api/ /web/html/api/
 VOLUME ./frontend/dist/:/web/html/
 EXPOSE 80 443
