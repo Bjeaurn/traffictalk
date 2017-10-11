@@ -46,7 +46,7 @@ set_error_handler(myErrorHandler);
 $database_url = getenv("DATABASE_URL"); // Doesn't work... stupid docker env. 
 
 define('DB_HOST', 'database'); // Check docker-compose.yml, use the link!
-define('DB_DATABASE', 'traffictalk');
+define('DB_DATABASE', 'postgres');
 define('DB_USER', 'postgres');
 define('DB_PASSWORD', 'postgres');
 define('DB_PORT', '5432');

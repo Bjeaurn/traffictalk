@@ -42,7 +42,7 @@ class Car {
 
     private function persistData(Car $car) {
         $db = Database::start();
-        $result = $db->query("INSERT INTO cars (id, kenteken, data) VALUES ('". uniqid() ."', '". $car->kenteken ."', '".json_encode($car)."')");
+        $result = $db->query("INSERT INTO cars (kenteken, data) VALUES ('". $car->kenteken ."', '".json_encode($car)."')");
     }
 
     private function fetchRemote(string $kenteken) {
