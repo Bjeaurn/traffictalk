@@ -4,8 +4,7 @@ $kenteken = $routing[1];
 if($kenteken) {
     $car = new Car($kenteken);
     $car = $car->fetch($kenteken);
-
-    if($car) {    
+    if(!$car->isEmpty() && $car->kenteken !== null) {    
         /*
         $data = new Stdclass;*/
         $data->id = $car->id;
@@ -19,9 +18,11 @@ if($kenteken) {
         $data->drivers[0] = new Stdclass;
         $data->drivers[0]->id = "abcd";
         $data->drivers[0]->name = "Bjorn Schijff";
+        new API($data, 200);
+        die();
+    } else {
+        API::error('No car found', 404);
     }
-
-    new API($data, 200);
     exit;
 }
 ?>

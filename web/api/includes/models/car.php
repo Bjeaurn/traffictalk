@@ -7,11 +7,13 @@ class Car {
         $this->fetchFromDatabase($kenteken);
         if(!$this->id) {
             $car = $this->fetchRemote($kenteken);
-            $this->persistData($car);
-            $obj = new Car($car->kenteken);
-            $obj->id = $car->id;
-            $obj->data = json_encode($car);
-            $this->fill($obj);
+            if(!$car->isEmpty()) {
+                $this->persistData($car);
+                $obj = new Car($car->kenteken);
+                $obj->id = $car->id;
+                $obj->data = json_encode($car);
+                $this->fill($obj);
+            }
         }
         return $this;
     }
@@ -45,7 +47,7 @@ class Car {
         $result = $db->query("INSERT INTO cars (kenteken, data) VALUES ('". $car->kenteken ."', '".json_encode($car)."')");
     }
 
-    private function fetchRemote(string $kenteken) {
+    private function fetchRemote(string $kenteken): Car {
         $kenteken = strtoupper($kenteken);
         $url = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json?$$app_token=siAJatNuW8SLBtzE04JSkFmWs&kenteken='.$kenteken;
         // $url = str_replace("&amp;", '&', $url);
@@ -59,13 +61,16 @@ class Car {
 
         $response = json_decode($response);
         $resObj = $response[0];
-
-        $data = new Car($resObj->kenteken);
-        $data->id = uniqid();
-        $data->merk = $resObj->merk;
-        $data->naam = $resObj->handelsbenaming;
-        $data->kenteken = $resObj->kenteken;
-        $data->kleur = $resObj->eerste_kleur;
+        if($resObj->kenteken !== null) {
+            $data = new Car($resObj->kenteken);
+            $data->id = uniqid();
+            $data->merk = $resObj->merk;
+            $data->naam = $resObj->handelsbenaming;
+            $data->kenteken = $resObj->kenteken;
+            $data->kleur = $resObj->eerste_kleur;
+        } else {
+            $data = new EmptyCar();
+        }
         return $data;
     }
 

@@ -43,8 +43,11 @@ RUN  apk update && apk upgrade && \
     rm -rf /var/cache/apk/*
 
 COPY ./frontend/dist/ /web/html/
-COPY ./frontend/config/ /web/html/
+COPY ./frontend/config/.htaccess /web/html/
 COPY ./api/ /web/html/api/
+
 EXPOSE 80 443
+
+ENV PORT=80
 
 RUN apk add --update nodejs
